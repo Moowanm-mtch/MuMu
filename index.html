@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Anniversary & I Love You 💖</title>
+  <meta name="description" content="พื้นที่บันทึกความทรงจำสุดแสนพิเศษและคำบอกรักที่มีเพียงคุณคนเดียวเท่านั้น">
+  
+  <!-- Google Fonts: Mitr, Sriracha and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Mitr:wght@300;400;600&family=Sriracha&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Music Player & Visualizer (Floating) -->
+  <div id="music-player-container" class="glass-card">
+    <div class="music-info">
+      <div class="music-disc-wrapper">
+        <div id="music-disc" class="disc-rotating">🎵</div>
+      </div>
+      <div class="music-meta">
+        <span class="music-title" id="song-title">Dreamy Synth Pad</span>
+        <span class="music-artist">Lover's Melody</span>
+      </div>
+    </div>
+    <div class="music-controls">
+      <button id="btn-music-toggle" aria-label="Play or Pause Music">
+        <svg id="play-icon" viewBox="0 0 24 24" class="icon hidden"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pause-icon" viewBox="0 0 24 24" class="icon"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button id="btn-music-source" aria-label="Switch Audio Source" title="สลับแนวเพลง">🎹</button>
+    </div>
+    <!-- Visualizer Bars -->
+    <div id="visualizer-bars">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <!-- Audio elements -->
+  <audio id="bg-audio" loop crossorigin="anonymous"></audio>
+
+  <!-- Canvas for Heart Confetti Fireworks -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Interactive Floating Background (Leaves / Hearts) -->
+  <div id="ambient-particles"></div>
+
+  <!-- Main Container -->
+  <main id="main-content">
+    
+    <!-- SECTION 1: Cake Blowing Screen -->
+    <section id="sec-cake-blow" class="active-section">
+      <div class="cake-container glass-card scale-in">
+        <header class="romantic-header">
+          <h1 class="glowing-text">สุขสันต์วันสุดแสนพิเศษนะคนดี 💖</h1>
+          <p class="subtitle">หลับตาลง อธิษฐานสิ่งที่คุณปรารถนา... แล้วเป่าเค้กชิ้นนี้ด้วยกันนะ</p>
+        </header>
+
+        <!-- 3D CSS Cake Component -->
+        <div class="cake-wrapper">
+          <div class="cake-plate"></div>
+          <div class="cake">
+            <div class="cake-layer cake-layer-bottom"></div>
+            <div class="cake-layer cake-layer-middle"></div>
+            <div class="cake-layer cake-layer-top"></div>
+            <div class="cake-icing"></div>
+            <div class="cake-drippings">
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+            </div>
+            
+            <!-- Strawberries on top -->
+            <div class="strawberries">
+              <span class="strawberry s1">🍓</span>
+              <span class="strawberry s2">🍓</span>
+              <span class="strawberry s3">🍓</span>
+              <span class="strawberry s4">🍓</span>
+              <span class="strawberry s5">🍓</span>
+            </div>
+
+            <!-- Interactive Candles -->
+            <div class="candles-wrapper">
+              <!-- Candle 1 -->
+              <div class="candle-container c1" id="candle-1">
+                <div class="flame-wrapper">
+                  <div class="flame-outer"></div>
+                  <div class="flame-inner"></div>
+                  <div class="flame-core"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body"></div>
+              </div>
+              <!-- Candle 2 (Middle) -->
+              <div class="candle-container c2" id="candle-2">
+                <div class="flame-wrapper">
+                  <div class="flame-outer"></div>
+                  <div class="flame-inner"></div>
+                  <div class="flame-core"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body"></div>
+              </div>
+              <!-- Candle 3 -->
+              <div class="candle-container c3" id="candle-3">
+                <div class="flame-wrapper">
+                  <div class="flame-outer"></div>
+                  <div class="flame-inner"></div>
+                  <div class="flame-core"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls & Mic Feedback -->
+        <div class="controls-wrapper">
+          <div id="mic-status-container" class="mic-status-inactive">
+            <div class="mic-pulse-ring"></div>
+            <span class="mic-icon">🎙️</span>
+            <span id="mic-text">อนุญาตเปิดไมค์เพื่อเป่าลมเทียนจริง</span>
+          </div>
+          
+          <!-- Mic Volume Progress Bar -->
+          <div id="mic-meter-wrapper" class="hidden">
+            <div id="mic-meter-fill"></div>
+          </div>
+
+          <div class="btn-group">
+            <button id="btn-allow-mic" class="btn-secondary">🎤 เป่าลมจริงผ่านไมค์</button>
+            <button id="btn-blow-fallback" class="btn-primary">เป่าเทียนด้วยรัก 🎂</button>
+          </div>
+          <p class="tip-text">เป่าลมแรงๆ ใส่ไมโครโฟนของคุณ หรือคลิกปุ่มเพื่อเป่าเค้กได้เลย!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Memory Journey Portfolio -->
+    <section id="sec-memory-journey" class="hidden-section">
+      <div class="gallery-wrapper">
+        <header class="gallery-header">
+          <h2 class="title-love">บันทึกรัก & ความทรงจำของเรา 🌹</h2>
+          
+          <!-- Animated Days Counter -->
+          <div id="days-counter-card" class="glass-card">
+            <span class="counter-label">ระยะเวลาที่เรารักกัน</span>
+            <div class="counter-number-wrapper">
+              <span id="days-number">0</span>
+              <span class="counter-unit">วัน</span>
+            </div>
+            <span class="counter-footer">...และจับมือเดินไปด้วยกันตลอดไป 💖</span>
+          </div>
+        </header>
+
+        <!-- Memory Stream Grid -->
+        <div class="polaroid-grid" id="polaroid-container">
+          
+          <!-- Polaroid 1 -->
+          <article class="polaroid-card glass-card scroll-reveal" style="--rotation: -4deg;">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo1.jpg" alt="ภาพถ่ายแห่งความทรงจำ 1" loading="lazy">
+              <div class="polaroid-shimmer"></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-text">ทุกครั้งที่มองหน้าคุณ... หัวใจก็เต้นแรงเสมอ 🥰</p>
+              <time class="polaroid-date">Memory #1</time>
+            </div>
+          </article>
+
+          <!-- Polaroid 2 -->
+          <article class="polaroid-card glass-card scroll-reveal" style="--rotation: 3deg;">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo2.jpg" alt="ภาพถ่ายแห่งความทรงจำ 2" loading="lazy">
+              <div class="polaroid-shimmer"></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-text">รอยยิ้มที่แสนสดใสของคุณคือดวงอาทิตย์ของผม ☀️</p>
+              <time class="polaroid-date">Memory #2</time>
+            </div>
+          </article>
+
+          <!-- Polaroid 3 -->
+          <article class="polaroid-card glass-card scroll-reveal" style="--rotation: -2deg;">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo3.jpg" alt="ภาพถ่ายแห่งความทรงจำ 3" loading="lazy">
+              <div class="polaroid-shimmer"></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-text">ความสุขเล็กๆ ในแต่ละวันที่ได้คุยและได้ยินเสียงกัน 🥤</p>
+              <time class="polaroid-date">Memory #3</time>
+            </div>
+          </article>
+
+          <!-- Polaroid 4 -->
+          <article class="polaroid-card glass-card scroll-reveal" style="--rotation: 5deg;">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo4.jpg" alt="ภาพถ่ายแห่งความทรงจำ 4" loading="lazy">
+              <div class="polaroid-shimmer"></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-text">ขอบคุณที่คอยซัพพอร์ตและอยู่ข้างๆ กันเสมอนะ 🤝</p>
+              <time class="polaroid-date">Memory #4</time>
+            </div>
+          </article>
+
+          <!-- Polaroid 5 -->
+          <article class="polaroid-card glass-card scroll-reveal" style="--rotation: -3deg;">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo5.jpg" alt="ภาพถ่ายแห่งความทรงจำ 5" loading="lazy">
+              <div class="polaroid-shimmer"></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-text">รักคุณที่สุดเลยนะคนดี สัญญาว่าจะดูแลอย่างดีที่สุด 💍</p>
+              <time class="polaroid-date">Memory #5</time>
+            </div>
+          </article>
+        </div>
+
+        <!-- Wax Sealed Envelope Section -->
+        <div id="envelope-section">
+          <div class="envelope-wrapper">
+            <h3 class="envelope-title">คุณได้รับจดหมายรักฉบับพิเศษ ✉️</h3>
+            
+            <div class="envelope-container" id="love-envelope">
+              <div class="envelope-front">
+                <div class="envelope-flap"></div>
+                <div class="envelope-pocket"></div>
+                <!-- Interactive Wax Seal -->
+                <div class="wax-seal" id="wax-seal-btn" title="คลิกเพื่อเปิดจดหมายรัก">
+                  <span class="heart-seal">❤</span>
+                </div>
+              </div>
+              
+              <!-- Letter inside -->
+              <div class="letter-sheet glass-card" id="love-letter">
+                <div class="letter-border">
+                  <div class="letter-content">
+                    <h4 class="letter-heading">ถึง เจ้ามุมุของพี่ 💖</h4>
+                    <div id="typing-container" class="letter-body">
+                      <!-- Typed text will go here dynamically -->
+                    </div>
+                    <div class="letter-signature">
+                      <p>ยัก มุมุ,</p>
+                      <p class="sign">จาก พี่วีร์สุดหล่อ 💍</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="envelope-hint">คลิกที่**ครั่งประทับตราหัวใจสีแดง**เพื่อเปิดอ่านจดหมายรักนะ</p>
+          </div>
+        </div>
+
+        <footer class="gallery-footer-text">
+          <p>Made with 💖 for my irreplaceable love</p>
+          <p>© 2026 Our Beautiful Journey</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sweet Success Overlay Notification -->
+  <div id="success-overlay" class="hidden">
+    <div class="success-content scale-in">
+      <span class="big-heart">💖</span>
+      <h2 class="happy-wish">พรที่คุณขอ... จะเป็นจริงนะ!</h2>
+      <p class="confetti-desc">เทียนวันเกิดดับลงแล้ว ไปดูความประทับใจที่เราสร้างร่วมกันกันเถอะ</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

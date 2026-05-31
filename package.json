@@ -1,0 +1,16 @@
+{
+  "name": "mumu-love-web",
+  "version": "1.0.0",
+  "description": "Happy Anniversary & Birthday Web App for MuMu",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "love",
+    "anniversary",
+    "birthday"
+  ],
+  "author": "P'Veer",
+  "license": "ISC"
+}
